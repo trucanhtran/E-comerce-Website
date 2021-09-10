@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   namespace :admin do
-    get 'dashboard/index'
+    get 'dashboard', to: "dashboard#index"
+    #user
+    get 'new_user', to: "manage_user#new_user"
   end
   root to: 'home#index'
   devise_for :users
