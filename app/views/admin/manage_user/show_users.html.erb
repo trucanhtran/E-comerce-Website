@@ -1,0 +1,9 @@
+<% @users.each do |user| %>
+  <div>
+    <%= user.first_name %>
+    <%= user.last_name %>
+    <%= user.email %>
+    <%= user.sex ? "Nam" : "Nữ" %>
+    <%= user.is_admin ? "Quản trị viên" : "Người dùng" %>
+  </div>
+<% end %>
