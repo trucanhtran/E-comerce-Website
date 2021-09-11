@@ -1,0 +1,29 @@
+<label for="filter">Theo giá</label>
+<select>
+  <option value=""></option>
+  <option value="">Cao nhất</option>
+    <option value="">Rẻ nhất</option>
+</select>
+<label for="filter">Theo ngày tạo</label>
+<select>
+  <option value=""></option>
+  <option value="">Gần nhất</option>
+    <option value="">Cũ nhất</option>
+</select>
+
+
+<div>
+  <span>Tên</span>
+  <span>Mô tả</span>
+  <span>Giá</span>
+  <span>Mục lục</span>
+</div>
+<% @products&.each do |product| %>
+  <div>
+    <%= link_to product.name, admin_edit_product_path(product.id) %>
+    <%= link_to product.description, admin_edit_product_path(product.id) %>
+    <%= link_to product.price, admin_edit_product_path(product.id) %>
+    <%= link_to product&.category&.name, admin_edit_product_path(product.id) %>
+    <%= link_to "Xóa", admin_delete_user_path(user.id), method: :delete, data: {confirm: "Bạn có chắc muốn xóa"}%>
+  </div>
+<% end %>

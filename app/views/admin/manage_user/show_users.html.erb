@@ -1,9 +1,31 @@
+<label for="filter">Theo người dùng</label>
+<select>
+  <option value=""></option>
+  <option value="">Quản trị viên</option>
+    <option value="">Người dùng</option>
+</select>
+<label for="filter">Theo ngày tạo</label>
+<select>
+  <option value=""></option>
+  <option value="">Gần nhất</option>
+    <option value="">Cũ nhất</option>
+</select>
+
+
+<div>
+  <span>Tên</span>
+  <span>Họ</span>
+  <span>Email</span>
+  <span>Giới tính</span>
+  <span>Người dùng</span>
+</div>
 <% @users.each do |user| %>
   <div>
-    <%= user.first_name %>
-    <%= user.last_name %>
-    <%= user.email %>
-    <%= user.sex ? "Nam" : "Nữ" %>
-    <%= user.is_admin ? "Quản trị viên" : "Người dùng" %>
+    <%= link_to user.first_name, admin_edit_user_path(user.id) %>
+    <%= link_to user.last_name, admin_edit_user_path(user.id) %>
+    <%= link_to user.email, admin_edit_user_path(user.id) %>
+    <%= link_to user.sex ? "Nam" : "Nữ", admin_edit_user_path(user.id) %>
+    <%= link_to user.is_admin ? "Quản trị viên" : "Người dùng", admin_edit_user_path(user.id) %>
+    <%= link_to "Xóa", admin_delete_user_path(user.id), method: :delete, data: {confirm: "Bạn có chắc muốn xóa"}%>
   </div>
 <% end %>
