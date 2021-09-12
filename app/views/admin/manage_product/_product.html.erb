@@ -12,6 +12,10 @@
     <%= form.number_field :price %>
   </div>
   <div>
+    <%= form.label :image %>
+    <%= form.file_field :images, multiple: true %>
+  </div>
+  <div>
     <%= form.collection_select :category_id, @categories, :id, :name, include_blank: @category&.first&.name %>
   </div>
   <div>

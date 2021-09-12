@@ -24,6 +24,6 @@
     <%= link_to product.description, admin_edit_product_path(product.id) %>
     <%= link_to product.price, admin_edit_product_path(product.id) %>
     <%= link_to product&.category&.name, admin_edit_product_path(product.id) %>
-    <%= link_to "Xóa", admin_delete_user_path(user.id), method: :delete, data: {confirm: "Bạn có chắc muốn xóa"}%>
+    <%= link_to "Xóa", admin_delete_product_path(product.id), method: :delete, data: {confirm: "Bạn có chắc muốn xóa"}%>
   </div>
 <% end %>

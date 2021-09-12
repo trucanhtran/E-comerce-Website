@@ -1,0 +1,23 @@
+<label for="filter">Theo giá</label>
+<select>
+  <option value=""></option>
+  <option value="">Cao nhất</option>
+    <option value="">Rẻ nhất</option>
+</select>
+<label for="filter">Theo ngày tạo</label>
+<select>
+  <option value=""></option>
+  <option value="">Gần nhất</option>
+    <option value="">Cũ nhất</option>
+</select>
+
+
+<div>
+  <span>Tên</span>
+</div>
+<% @categories&.each do |category| %>
+  <div>
+    <%= link_to category.name, admin_edit_category_path(category.id) %>
+    <%= link_to "Xóa", admin_delete_category_path(category.id), method: :delete, data: {confirm: "Bạn có chắc muốn xóa"}%>
+  </div>
+<% end %>

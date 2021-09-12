@@ -15,6 +15,13 @@ Rails.application.routes.draw do
      get 'edit_product/:id', to: "manage_product#edit_product", as: "edit_product"
      patch 'update_product/:id', to: "manage_product#update_product", as: "update_product"
      delete 'delete_product/:id', to: "manage_product#delete_product", as: "delete_product"
+     #category
+     get 'categories', to: "manage_category#show_categories"
+     get 'new_category', to: "manage_category#new_category"
+     post 'create_category', to: "manage_category#create_category"
+     get 'edit_category/:id', to: "manage_category#edit_category", as: "edit_category"
+     patch 'update_category/:id', to: "manage_category#update_category", as: "update_category"
+     delete 'delete_category/:id', to: "manage_category#delete_category", as: "delete_category"
   end
   root to: 'home#index'
   devise_for :users

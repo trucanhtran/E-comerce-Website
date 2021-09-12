@@ -1,9 +1,9 @@
 class Admin::ManageProductController < AdminApplicationController
-  before_action :get_poduct, only: %i[edit_poduct update_poduct delete_poduct]
+  before_action :get_product, only: %i[edit_product update_product delete_product]
   before_action :get_categories, only: %i[new_product]
 
-  def show_poducts
-    @poducts = Product.all.includes(:category)
+  def show_products
+    @products = Product.all.includes(:category)
   end
 
   def new_product
@@ -24,6 +24,7 @@ class Admin::ManageProductController < AdminApplicationController
 
   def update_product
     if @product.present?
+      product.images.attach(params[:product][:images])
       @product.update(product_params)
       redirect_to admin_products_path, notice: "Update sản phẩm thành công"
     else
@@ -50,6 +51,6 @@ class Admin::ManageProductController < AdminApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :description, :price, :view_count, :category_id)
+    params.require(:product).permit(:name, :description, :price, :view_count, :category_id, images: [])
   end
 end
