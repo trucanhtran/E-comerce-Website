@@ -16,7 +16,12 @@ class Lazada
   def start_parsing
     raw_home_page = using_nokogiri(@url)
     arr_category = collect_category(raw_home_page)
-    p arr_category
+    arr_category.each do |category|
+      current_category = category[:category_name]
+      category_link = category[:category_link]
+      p current_category
+      p category_link
+    end
   end
 
   def collect_category(raw_home_page)
@@ -28,6 +33,8 @@ class Lazada
         link.css(".lzd-site-menu-root-item").each_with_index do |cat_lv1, index|
           category_level1_href = cat_lv1.at_css("a").values
           category_level1_text = cat_lv1.at_css("a span").text
+          #save Category lv1 to db
+          category_level1 = Category.find_or_create_by(name: category_level1_text)
           p "start getting category lever 1 #{category_level1_text.strip}"
 
           #start geting category level 2 belong to category lv1 with index
@@ -36,9 +43,12 @@ class Lazada
 
             begin
               sub_href = sub_link.at_css("a").values
-              sub_text = sub_link.at_css("a span").text
-              arr_category<<{category_level1: category_level1_text, sub_text: sub_text, sub_href: sub_href }
-              p "start getting category lv 2: #{sub_text} link #{sub_href}"
+              sub_name = sub_link.at_css("a span").text
+              #save Category lv2 to db
+              category_level2 = Category.find_or_create_by(name: sub_name, :ancestry => category_level1.id)
+
+              arr_category<< {category_name: sub_name, category_link: sub_href }
+              p "start getting category lv 2: #{sub_name} link #{sub_href}"
 
             rescue
               p "error here #{category_level1.strip}"
