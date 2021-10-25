@@ -15,6 +15,7 @@ Rails.application.routes.draw do
      get 'edit_product/:id', to: "manage_product#edit_product", as: "edit_product"
      patch 'update_product/:id', to: "manage_product#update_product", as: "update_product"
      delete 'delete_product/:id', to: "manage_product#delete_product", as: "delete_product"
+     get 'show_product/:id', to: "manage_product#show_product", as: "show_product"
      #category
      get 'categories', to: "manage_category#show_categories"
      get 'new_category', to: "manage_category#new_category"

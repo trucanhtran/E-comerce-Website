@@ -1,9 +1,13 @@
 class Admin::ManageProductController < AdminApplicationController
-  before_action :get_product, only: %i[edit_product update_product delete_product]
-  before_action :get_categories, only: %i[new_product]
+  before_action :get_product, only: %i[show_product edit_product update_product delete_product]
+  before_action :get_categories, only: %i[edit_product new_product]
 
   def show_products
     @products = Product.all.includes(:category)
+  end
+
+  def show_product
+
   end
 
   def new_product
