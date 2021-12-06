@@ -1,24 +1,73 @@
-<%= form_with(model: product, url: path) do |form| %>
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-  <div>
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-  <div>
-    <%= form.label :price %>
-    <%= form.number_field :price %>
-  </div>
-  <div>
-    <%= form.label :image %>
-    <%= form.file_field :images, multiple: true %>
-  </div>
-  <div>
-    <%= form.collection_select :category_id, @categories, :id, :name, include_blank: @category&.first&.name %>
-  </div>
-  <div>
-    <%= form.submit "Lưu" %>
-  </div>
-<% end %>
+<div class='form__product__wrapper' style='bgcolor: #fff'>
+  <%= form_with(model: product, url: path) do |form| %>
+
+    <div class='form_field field__product__name'>
+      <%= form.label :name %>
+      <%= form.text_area :name, class: 'form-control bg-white small' %>
+    </div>
+
+    <div class=' form_field field__product__price'>
+      <%= form.label :price %>
+      <%= form.number_field :price, class: 'form-control bg-white small'%>
+    </div>
+
+    <div class=' form_field field__product__quantity'>
+      <%= form.label :quantity, 'Số lượng' %>
+      <%= form.number_field :quantity, class: 'form-control bg-white small'%>
+    </div>
+
+    <div class=' form_field field__product__images input-file-container' >
+      <%= form.label :image %>
+      <%= form.file_field :images, multiple: true, id:'id_product_gallery_upload', class: 'input-file' %>
+      <label tabindex="0" for="my-file" class="input-file-trigger">Select a file...</label>
+    </div>
+    <div id='product__gallery__wrapper'></div>
+
+    <div class=' form_field field__product__description'>
+      <%= form.label :description, 'Mô tả' %>
+      <%= form.text_area :description, class: 'form-control bg-white small' %>
+    </div>
+
+    <div class=' form_field field__product__category'>
+    <%= form.label :category_id, 'Mục lục' %>
+      <%= form.collection_select :category_id, @categories, :id, :name, include_blank: @category&.first&.name, class: 'form-control bg-white small' %>
+    </div>
+
+    <div class='field__product__submit'>
+      <%= form.submit "Lưu", class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>
+
+
+
+<script>
+function previewImages() {
+
+  var $preview = $('#product__gallery__wrapper').empty();
+  if (this.files) $.each(this.files, readAndPreview);
+
+  function readAndPreview(i, file) {
+
+    if (!/\.(jpe?g|png|gif)$/i.test(file.name)){
+      return alert(file.name +" is not an image");
+    } // else...
+
+    var reader = new FileReader();
+
+    $(reader).on("load", function() {
+      $preview.append($("<img/>", {src:this.result, height:100}));
+    });
+
+    reader.readAsDataURL(file);
+
+  }
+
+}
+
+$('#id_product_gallery_upload').on("change", previewImages);
+
+//test
+
+
+</script>

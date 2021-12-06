@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_15_081909) do
+ActiveRecord::Schema.define(version: 2021_12_05_104323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,14 +51,28 @@ ActiveRecord::Schema.define(version: 2021_09_15_081909) do
     t.index ["ancestry"], name: "index_categories_on_ancestry"
   end
 
+  create_table "product_ratings", force: :cascade do |t|
+    t.integer "start"
+    t.text "comment"
+    t.bigint "user_id"
+    t.bigint "product_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_product_ratings_on_product_id"
+    t.index ["user_id"], name: "index_product_ratings_on_user_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.float "price"
     t.integer "view_count"
+    t.integer "quantity"
     t.bigint "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "price_after_discount"
+    t.integer "discount"
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 

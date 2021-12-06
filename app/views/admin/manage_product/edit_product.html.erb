@@ -1,1 +1,6 @@
+<div class='admin-product__button__wrapper'>
+  <div class='admin-product__button__back'>
+    <%= link_to "Quay về", admin_show_product_path(@product.id) %>
+  </div>
+</div>
 <%= render partial: "product", locals: {product: @product, path: admin_update_product_path(@product.id), method: :patch} %>

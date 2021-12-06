@@ -15,3 +15,54 @@
  */
 @import "admin/all.min";
 @import "admin/sb-admin-2.min";
+@import "admin/product";
+@import "swipe_product";
+
+:root {
+  --text-color: #626262;
+  --sub-text-color: #898989;
+}
+
+.form_field,
+.field__product__submit {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form_field input {
+  flex: 1;
+  background-color: #fff;
+}
+
+//images wrapper
+.input-file-container {
+  position: relative;
+  width: 225px;
+}
+.input-file-trigger {
+  display: block;
+  padding: 14px 45px;
+  background: #39d2b4;
+  color: #fff;
+  font-size: 1em;
+  transition: all 0.4s;
+  cursor: pointer;
+}
+
+.input-file {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 225px;
+  opacity: 0;
+  padding: 14px 0;
+  cursor: pointer;
+}
+.input-file:hover + .input-file-trigger,
+.input-file:focus + .input-file-trigger,
+.input-file-trigger:hover,
+.input-file-trigger:focus {
+  background: #34495e;
+  color: #39d2b4;
+}

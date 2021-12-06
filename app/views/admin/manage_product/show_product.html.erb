@@ -1,17 +1,116 @@
-<div>
-  <%= @product.name %>
+<div class='admin-product__button__wrapper'>
+  <div class='admin-product__button__back'>
+    <%= link_to "Quay về", admin_products_path %>
+  </div>
+  <div class='admin-product__button__edit'>
+    <%=link_to admin_edit_product_path do %>
+      <i class="far fa-edit"></i>
+    <% end %>
+    <%= link_to "Edit", admin_edit_product_path %>
+  </div>
 </div>
-<div>
-  <%= @product.description %>
+<div class='admin-product__container'>
+
+  <div class='product__image__wrapper'>
+    <div class="swiper mySwiper2">
+
+      <div class="swiper-wrapper">
+        <% @product&.images&.each do |image| %>
+          <div class="swiper-slide">
+            <%= image_tag image %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="swiper-button-next product__image__button-next"></div>
+      <div class="swiper-button-prev product__image__button-prev"></div>
+    </div>
+
+    <div thumbsSlider="" class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <% @product&.images&.each do |image| %>
+          <div class="swiper-slide">
+            <%= image_tag image %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class='admin-product__info'>
+    <div class='admin-product__name'>
+      <%= @product.name %>
+    </div>
+    <div class='admin-product__price'>
+      <label>Giá: </label>
+      <%= @product.price %>
+    </div>
+    <div class='admin-product__desc'>
+      <%= @product.description %>
+    </div>
+    <div class='admin-product__category'>
+      <%= @product&.category&.name %>
+    </div>
+  </div>
+
+  <div class='admin-product__wrapper'>
+
+    <div class='admin-product__info'>
+      <div class='admin-product__date'>
+        <label>Ngày tạo: </label>
+        <%= @product.created_at %>
+      </div>
+      <div class='admin-product__start'>
+        <label>Xếp hạng: </label>
+        <%= @product.created_at %>
+      </div>
+      <div class='admin-product__comment'>
+        <label>Đánh giá: </label>
+        <%= @product.created_at %>
+      </div>
+    </div>
+
+    <div class='admin-product__info'>
+      <div class='admin-product__quantity'>
+        <label>Số lượng: </label>
+        <%= @product.quantity %>
+      </div>
+      <div class='admin-product__discount'>
+        <label>Giảm giá: </label>
+        <%= @product.discount %>
+      </div>
+      <div class='admin-product__sold'>
+        <label>Đã bán: </label>
+        <%= @product.created_at %>
+      </div>
+        <div class='admin-product__revenue'>
+        <label>Doanh thu: </label>
+      </div>
+    </div>
+  </div>
 </div>
-<div>
-  <%= @product.price %>
-</div>
-<div>
-  <%= @product&.category&.name %>
-</div>
-<div>
-  <% @product&.images&.each do |image| %>
-    <%= image_tag image %>
-  <% end %>
-</div>
+
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+  var swiper = new Swiper(".mySwiper", {
+    loop: true,
+    spaceBetween: 10,
+    slidesPerView: 4,
+    freeMode: true,
+    watchSlidesProgress: true,
+  });
+  var swiper2 = new Swiper(".mySwiper2", {
+    loop: true,
+    spaceBetween: 10,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    thumbs: {
+      swiper: swiper,
+    },
+  });
+</script>

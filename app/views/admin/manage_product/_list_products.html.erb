@@ -1,0 +1,39 @@
+<div class='product__index'>
+  <%= index + 1 %>
+</div>
+<div class='product__thumbnail'>
+  <%= image_tag product.images[0], width: '100px' %>
+</div>
+
+<div class='product__info'>
+  <div class='product__name'>
+    <label>Tên: </label>
+    <%= link_to product.name, admin_edit_product_path(product.id) %>
+  </div>
+  <div class='product__price'>
+    <label>Giá: </label>
+    <%= link_to product.price, admin_edit_product_path(product.id) %>
+  </div>
+  <div class='product__category'>
+    <label>Danh mục: </label>
+    <%= link_to product&.category&.name, admin_edit_product_path(product.id) %>
+  </div>
+</div>
+
+<div class='product__start'>
+  4.7 sao
+</div>
+
+<div class='product__rating'>
+  0 đánh giá
+</div>
+
+<div class='product__created'>
+  Tạo ngày
+  <%= product&.created_at.to_date%>
+</div>
+
+<div class='product__setting'>
+  <%= link_to "Xóa", admin_delete_product_path(product.id), method: :delete, data: {confirm: "Bạn có chắc muốn xóa"}%>
+  <%= link_to "Xem trước sản phẩm", admin_show_product_path(product.id)%>
+</div>
