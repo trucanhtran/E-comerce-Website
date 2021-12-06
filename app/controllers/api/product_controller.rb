@@ -1,9 +1,9 @@
-class Api::ProductController < ApplicationController::API
+class Api::ProductController < ApplicationController
   before_action :get_poduct, only: %i[edit_poduct update_poduct delete_poduct]
   before_action :get_categories, only: %i[new_product]
 
-  def show_poducts
-    products = Product.all.includes(:category)
+  def show_products
+    products = Product.includes(:category)
     render json: products, status: :ok
   end
 
