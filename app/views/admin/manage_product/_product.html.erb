@@ -1,4 +1,4 @@
-<div class='form__product__wrapper' style='bgcolor: #fff'>
+<div class='form__product__wrapper'>
   <%= form_with(model: product, url: path) do |form| %>
 
     <div class='form_field field__product__name'>
@@ -6,22 +6,37 @@
       <%= form.text_area :name, class: 'form-control bg-white small' %>
     </div>
 
-    <div class=' form_field field__product__price'>
+    <div class='form_field field__product__price'>
       <%= form.label :price %>
       <%= form.number_field :price, class: 'form-control bg-white small'%>
     </div>
 
-    <div class=' form_field field__product__quantity'>
+    <div class='form_field field__product__quantity'>
       <%= form.label :quantity, 'Số lượng' %>
       <%= form.number_field :quantity, class: 'form-control bg-white small'%>
     </div>
 
-    <div class=' form_field field__product__images input-file-container' >
+    <div class='form_field field__product__images input-file-container' >
       <%= form.label :image %>
       <%= form.file_field :images, multiple: true, id:'id_product_gallery_upload', class: 'input-file' %>
       <label tabindex="0" for="my-file" class="input-file-trigger">Select a file...</label>
     </div>
     <div id='product__gallery__wrapper'></div>
+
+    <% if product.present?%>
+      <div class='product__images__preview'>
+          <% product.images.each_with_index do |image, index|%>
+            <div class='product__image__preview' id='id_image_<%= image.id %>'>
+              <%= image_tag image %>
+              <div>
+                <i class="far fa-times-circle product__icon__close" onClick="removeImage(<%=image.id%>,<%=product.id%>)"></i>
+                <div class="product__image__id"><%= index %></div>
+              </div>
+            </div>
+          <% end %>
+      </div>
+    <% end %>
+
 
     <div class=' form_field field__product__description'>
       <%= form.label :description, 'Mô tả' %>
@@ -68,6 +83,18 @@ function previewImages() {
 $('#id_product_gallery_upload').on("change", previewImages);
 
 //test
+  function removeImage(imageId, productId) {
+  $.post(
+    "clear_image",
+    { productId: productId, imageId: imageId },
+    function (data, status) {
+      console.log(data, status);
+      if (status == 'success'){
+        $('#id_image_'+imageId).remove()
+      }
 
+    }
+  );
+  }
 
 </script>

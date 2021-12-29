@@ -23,6 +23,7 @@ Rails.application.routes.draw do
      get 'edit_category/:id', to: "manage_category#edit_category", as: "edit_category"
      patch 'update_category/:id', to: "manage_category#update_category", as: "update_category"
      delete 'delete_category/:id', to: "manage_category#delete_category", as: "delete_category"
+     post 'edit_product/clear_image', to: 'manage_product#clear_image', as: 'clear_image'
   end
   root to: 'home#index'
   devise_for :users

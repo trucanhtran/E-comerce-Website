@@ -3,7 +3,7 @@ class Admin::ManageProductController < AdminApplicationController
   before_action :get_categories, only: %i[edit_product new_product]
 
   def show_products
-    @products = Product.all.includes(:category)
+    @products = Product.includes(:category)
   end
 
   def show_product
@@ -28,7 +28,7 @@ class Admin::ManageProductController < AdminApplicationController
 
   def update_product
     if @product.present?
-      product.images.attach(params[:product][:images])
+      @product.images.attach(params[:product][:images])
       @product.update(product_params)
       redirect_to admin_products_path, notice: "Update sản phẩm thành công"
     else
@@ -43,6 +43,16 @@ class Admin::ManageProductController < AdminApplicationController
     else
       render json: {error: "Không thể cập nhật product"}, status: :not_found
     end
+  end
+
+  def clear_image
+    product = Product.find_by(id: params[:productId])
+    remove_image = product.images.find_by(id: params[:imageId])
+    if remove_image.present?
+      remove_image.destroy
+    end
+
+    render json: {}, status: :ok
   end
 
   private

@@ -310,3 +310,24 @@
 }
 .field__product__category {
 }
+
+.product__images__preview {
+  display: flex;
+  flex-direction: row;
+}
+
+.product__image__preview {
+  width: 100px;
+  height: 100px;
+  // position: relative;
+}
+
+.product__image__preview img {
+  width: 100%;
+}
+
+.product__image__preview i {
+  // position: absolute;
+  // right: 0;
+  // color: white;
+}
