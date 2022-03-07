@@ -1,0 +1,43 @@
+version: "3.7"
+
+services:
+  db:
+    image: mysql:8.0.21
+    command:
+      - --default-authentication-plugin=mysql_native_password
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=ecommerce_website_development
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql:/var/lib/mysql
+  redis:
+    image: "redis:4.0-alpine"
+    command: redis-server
+    volumes:
+      - "redis:/data"
+  website:
+    depends_on:
+      - "db"
+      - "redis"
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    ports:
+      - "3000:3000"
+    tty: true
+    stdin_open: true
+    restart: always
+    volumes:
+      - ".:/myapp"
+      - redmine_bundle:/usr/local/bundle
+volumes:
+  redis:
+  db:
+  redmine_bundle:
+  bundle:
+    name: redmine_bundle
+  mysql:
+    driver: local
