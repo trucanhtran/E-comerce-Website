@@ -1,0 +1,68 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import "admin/all.min";
+@import "admin/sb-admin-2.min";
+@import "admin/product";
+@import "swipe_product";
+
+:root {
+  --text-color: #626262;
+  --sub-text-color: #898989;
+}
+
+.form_field,
+.field__product__submit {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form_field input {
+  flex: 1;
+  background-color: #fff;
+}
+
+//images wrapper
+.input-file-container {
+  position: relative;
+  width: 225px;
+}
+.input-file-trigger {
+  display: block;
+  padding: 14px 45px;
+  background: #39d2b4;
+  color: #fff;
+  font-size: 1em;
+  transition: all 0.4s;
+  cursor: pointer;
+}
+
+.input-file {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 225px;
+  opacity: 0;
+  padding: 14px 0;
+  cursor: pointer;
+}
+.input-file:hover + .input-file-trigger,
+.input-file:focus + .input-file-trigger,
+.input-file-trigger:hover,
+.input-file-trigger:focus {
+  background: #34495e;
+  color: #39d2b4;
+}

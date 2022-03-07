@@ -1,0 +1,83 @@
+<div class='admin-products__header'>
+
+  <div class='select-box select__price'>
+    <label for="filter" class='select__label'>
+      <span class="label__desc">--Theo giá--</span>
+    </label>
+    <select class='select' id='id_select_price'>
+      <option value="max">Cao nhất</option>
+      <option value="min">Rẻ nhất</option>
+    </select>
+  </div>
+
+  <div class='select-box select__date'>
+    <label for="filter" class='select__label'>
+      <span class="label__desc" id='id_label_date'>--Theo ngày tạo--</span>
+    </label>
+    <select class='select'  id='id_select_date'>
+      <option value="max">Gần nhất</option>
+      <option value="min">Cũ nhất</option>
+    </select>
+  </div>
+
+  <div class='product__new'>
+    <%= link_to admin_new_product_path do %>
+      <i class="fas fa-plus-square"></i>
+    <%end%>
+    <%= link_to 'Tạo sản phẩm mới', admin_new_product_path%>
+  </div>
+</div>
+
+<div class='admin-products product__list'>
+  <% @products&.each_with_index do |product, index| %>
+
+    <% if product.quantity == 0 %>
+      <div class='admin-product product__item shadow product__item--disable'>
+        <%= render partial: 'list_products', locals: {product: product, index: index} %>
+      </div>
+    <% else %>
+
+      <div class='admin-product product__item shadow product__item--enable'>
+        <%= render partial: 'list_products', locals: {product: product, index: index} %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<script>
+  <%
+=begin%>
+ $("select").on("click" , function() {
+
+    $(this).parent(".select-box").toggleClass("open");
+
+  });
+
+  $(document).mouseup(function (e)
+  {
+      var container = $(".select-box");
+
+      if (container.has(e.target).length === 0)
+      {
+          container.removeClass("open");
+      }
+  });
+
+
+  $("select").on("change" , function() {
+
+    var selection = $(this).find("option:selected").text(),
+        labelFor = $(this).attr("id"),
+        label = $("[for='" + labelFor + "']");
+
+    label.find(".label__desc").html(selection);
+
+  });
+<%
+=end%>
+
+
+
+
+
+</script>

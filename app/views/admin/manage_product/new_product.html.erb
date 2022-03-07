@@ -1,0 +1,9 @@
+<div class='admin-product__button__wrapper'>
+  <div class='admin-product__button__back'>
+    <%= link_to admin_products_path do %>
+      <i class="fas fa-list-ul"></i>
+    <% end %>
+    <%= link_to "List sản phẩm", admin_products_path %>
+  </div>
+</div>
+<%= render partial: "product", locals: {product: @product, path: admin_create_product_path, method: :post} %>
